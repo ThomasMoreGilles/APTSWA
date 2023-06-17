@@ -16,6 +16,9 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <h1 class="text-center mb-4">Movies:</h1>
+                <div class="mt-4 text-center">
+                    <a class="btn btn-primary" th:href="@{/admin/addMovie/}">Add new movie</a>
+                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <!-- Table header -->
@@ -25,7 +28,6 @@
                                 <th>Director</th>
                                 <th>Year</th>
                                 <th>Duration</th>
-                    
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -45,9 +47,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="mt-4 text-center">
-                    <a class="btn btn-primary" th:href="@{/admin/addMovie/}">Add new movie</a>
                 </div>
             </div>
         </div>
