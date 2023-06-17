@@ -1,38 +1,61 @@
 <!DOCTYPE html>
-<html lang="nl-BE" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/head :: head">
+<html xmlns:th="http://www.thymeleaf.org" lang="nl-BE">
+
+<!-- Head -->
+<head th:replace="fragments/head :: head">
     <meta charset="UTF-8">
-    <title id="title">Home</title>
+    <title id="title">Movie Details</title>
 </head>
+
 <body>
-<div th:replace="fragments/headerfooter :: header"> header</div>
+    <!-- Header -->
+    <div th:replace="fragments/headerfooter :: header"></div>
 
-<a id="arrow+" th:if="${!lastPage}" th:href="@{'/user/detail/' + ${movie.getId() + 1}}" th:text="'-->'"></a>
-<a id="arrow-" th:if="${movie.getId() != 1}" th:href="@{'/user/detail/' + ${movie.getId() - 1}}" th:text="'<--'"></a>
+    <!-- Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <!-- Navigation Buttons -->
+            <div class="col-lg-10 d-flex justify-content-between align-items-center my-4">
+                <a id="arrow-" th:unless="${movie.getId() == 1}" th:href="@{'/user/detail/' + ${movie.getId() - 1}}" class="btn btn-outline-primary">Previous</a>
+                <!-- Add to Cart Button -->
+                <form th:action="@{'/user/addToCart/' + ${movie.getId()}}" method="post" class="mx-auto">
+                    <input class="btn btn-primary btn-lg" th:value="'Add to cart'" type="submit">
+                </form>
+                <a id="arrow+" th:unless="${lastPage}" th:href="@{'/user/detail/' + ${movie.getId() + 1}}" class="btn btn-outline-primary">Next</a>
+            </div>
+            <!-- Movie Details Card -->
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title" th:text="${movie.getTitle()}"></h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" th:text="${movie.getDescription()}"></p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-sm-4">Director:</dt>
+                            <dd class="col-sm-8" th:text="${movie.getAuthor()}"></dd>
+                            <dt class="col-sm-4">Release year:</dt>
+                            <dd class="col-sm-8" th:text="${movie.getYear()}"></dd>
+                            <dt class="col-sm-4">Duration:</dt>
+                            <dd class="col-sm-8" th:text="${movie.getDuration()}"></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <!-- Movie Image Card -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <img id="imageDetail" th:src="@{/img/placeholder.jpeg}" class="figure-img img-fluid rounded" alt="poster"/>                </div>
+            </div>
+        </div>
+    </main>
 
-<h2 id="titleDetail" th:text="${movie.getTitle()}"></h2>
-<article class="flexDetail">
-    <figure>
-        <img id="imageDetail" th:src="@{/img/boek.jpg}" alt="picture"/>
-    </figure>
-    <section>
+    <!-- Footer -->
+    <div th:replace="fragments/headerfooter :: footer"></div>
 
-        <dl>
-            <dt>Director:</dt>
-            <dd th:text="${movie.getAuthor()}"></dd>
-            <dt>Description:</dt>
-            <dd th:text="${movie.getDescription()}"></dd>
-            <dt>Release year:</dt>
-            <dd th:text="${movie.getYear()}"></dd>
-            <dt>Duration:</dt>
-            <dd th:text="${movie.getDuration()}"></dd>
-        </dl>
-    </section>
-</article>
-
-<form th:action="@{'/user/addToCart/' + ${movie.getId()}}" method="post">
-    <input class="buttonBuy" th:value="'Add to cart'" type="submit">
-</form>
+    <!-- Scripts -->
+    <div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
 </html>
