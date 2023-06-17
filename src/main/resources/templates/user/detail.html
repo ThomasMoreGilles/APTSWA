@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="nl-BE" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/head :: head">
+    <meta charset="UTF-8">
+    <title id="title">Home</title>
+</head>
+<body>
+<div th:replace="fragments/headerfooter :: header"> header</div>
+
+<a id="arrow+" th:if="${!lastPage}" th:href="@{'/user/detail/' + ${movie.getId() + 1}}" th:text="'-->'"></a>
+<a id="arrow-" th:if="${movie.getId() != 1}" th:href="@{'/user/detail/' + ${movie.getId() - 1}}" th:text="'<--'"></a>
+
+<h2 id="titleDetail" th:text="${movie.getTitle()}"></h2>
+<article class="flexDetail">
+    <figure>
+        <img id="imageDetail" th:src="@{/img/boek.jpg}" alt="picture"/>
+    </figure>
+    <section>
+
+        <dl>
+            <dt>Author:</dt>
+            <dd th:text="${movie.getAuthor()}"></dd>
+            <dt>Description:</dt>
+            <dd th:text="${movie.getDescription()}"></dd>
+            <dt>Release year:</dt>
+            <dd th:text="${movie.getYear()}"></dd>
+            <dt>Duration:</dt>
+            <dd th:text="${movie.getPages()}"></dd>
+        </dl>
+    </section>
+</article>
+
+<form th:action="@{'/user/addToCart/' + ${movie.getId()}}" method="post">
+    <input class="buttonBuy" th:value="'Add to cart'" type="submit">
+</form>
+
+</body>
+</html>

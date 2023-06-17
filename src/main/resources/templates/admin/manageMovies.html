@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="nl-BE">
+
+<!-- Head -->
+<head th:replace="fragments/head :: head">
+    <meta charset="UTF-8">
+    <title id="title">Tips bewerken</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:replace="fragments/headerfooter :: header"></div>
+
+    <!-- Content -->
+    <main class="container-fluid py-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Movies:</h1>
+                <div class="table-responsive">
+                    <table class="table">
+                        <!-- Table header -->
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Year</th>
+                                <th>Duration</th>
+                    
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody>
+                            <tr th:each="movie: ${movies}">
+                                <td th:text="${movie.getTitle()}"></td>
+                                <td th:text="${movie.getAuthor()}"></td>
+                                <td th:text="${movie.getYear()}"></td>
+                                <td th:text="${movie.getDuration() + ' min'}"></td>
+                                <td>
+                                    <form method="post" th:action="@{/admin/deleteMovie}">
+                                        <input type="hidden" name="id" th:value="${movie.getId()}">
+                                        <button class="btn btn-outline-danger btn-sm" type="submit" th:name="movie">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 text-center">
+                    <a class="btn btn-primary" th:href="@{/admin/addMovie/}">Add new movie</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="fragments/headerfooter :: footer"></div>
+
+    <!-- Scripts -->
+    <div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

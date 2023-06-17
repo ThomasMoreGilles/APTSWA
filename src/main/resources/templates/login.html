@@ -3,25 +3,24 @@
 
 <head th:replace="fragments/head :: head">
     <meta charset="UTF-8">
-    <title id="title">Home</title>
+    <title id="title">Login</title>
 </head>
 
-<body>
+<body class="bodyLogin">
     <div th:replace="fragments/headerfooter :: header"></div>
 
     <main class="container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-12 text-center">
-                <h1 class="display-4">My Movies: </h1>
-                <section th:each="movie: ${movies}" class="list-group-item">
-                    <span id="movieTitle" th:text="${movie.getTitle()}"></span>
-                </section>
+                <form th:action="@{/login}" class="form1" method="post">
+                    <input class="un " name="username" type="text" placeholder="Username">
+                    <input class="pass" type="password" name="password" placeholder="Password">
+                    <input type="submit" class="submit" value="Sign in">
+                </form>
             </div>
         </div>
     </main>
 
-    <div th:replace="fragments/headerfooter :: footer"></div>
     <div th:replace="fragments/scripts :: scripts"></div>
-
 </body>
 </html>

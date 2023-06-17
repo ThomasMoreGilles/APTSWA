@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="nl-BE">
+
+<!-- Head -->
+<head th:replace="fragments/head :: head">
+    <meta charset="UTF-8">
+    <title id="title">Start - admin </title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:replace="fragments/headerfooter :: header"></div>
+
+    <!-- Content -->
+    <main class="container-fluid py-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <!-- Jumbotron for standout message -->
+                <div class="jumbotron text-center">
+                    <h1 class="display-4">Welcome to the Admin Panel!</h1>
+                    <p class="lead">Manage your movie database efficiently and easily.</p>
+                    <hr class="my-4">
+                    <p>Start managing your movies by clicking the button below!</p>
+                    <a class="btn btn-primary btn-lg" th:href="@{/admin/manageMovies/}" role="button">Manage Movies</a>
+                </div>
+
+                <!-- Info Section -->
+                <section class="mt-5 text-center">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Additional Information</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">At this moment in time, our only function for administrators is to manage movies. More features will be added in the future.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="fragments/headerfooter :: footer"></div>
+
+    <!-- Scripts -->
+    <div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
+

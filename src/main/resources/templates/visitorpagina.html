@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="nl-BE">
+
+<head th:replace="fragments/head :: head">
+    <meta charset="UTF-8">
+    <title id="title">Visitor Page </title>
+</head>
+
+<body>
+    <div th:replace="fragments/headerfooter :: header"></div>
+
+    <main class="container-fluid py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h1 class="display-4 mb-4">Welcome to Our Movie Lending Platform!</h1>
+                <p class="lead">Our web application is designed to provide an excellent movie lending service. Here, you can find a wide variety of movies for both educational and entertainment purposes. We aim to create a community where movie enthusiasts can have access to their favorite movies and also discover new ones.</p>
+                <p class="lead">To get started, you need to create an account or login if you already have one. Once logged in, you'll be able to explore our vast collection, lend movies, and manage your account details. It's that simple!</p>
+                
+                <div class="mt-4">
+                    <a class="btn btn-primary mr-2" th:href="@{/login}">Login</a>
+                    <a class="btn btn-secondary" th:href="@{/registration}">Register</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments/headerfooter :: footer"></div>
+    <div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
