@@ -12,13 +12,20 @@
     <main class="container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-12 text-center">
-                <h1 class="display-4">Something went wrong, please go back to the previous page</h1>
+                <h1 class="display-4">Something went wrong, <br> please go back to the previous page.</h1>
+                <button class="btn btn-primary mt-3" onclick="goBack()">Go Back</button>
             </div>
         </div>
     </main>
 
     <div th:replace="fragments/headerfooter :: footer"></div>
     <div th:replace="fragments/scripts :: scripts"></div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
 </body>
 </html>
