@@ -36,7 +36,6 @@ public class AdminController {
 
     @GetMapping({"/addMovie","/addmovie"})
     public String addMovie(){
-
         return "admin/addMovie";
     }
 
