@@ -1,31 +1,37 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE html>
 <html lang="nl-BE" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/head :: head">
     <meta charset="UTF-8">
-    <title id="title">Catalog</title>
+    <title id="title">Your Cart</title>
 </head>
 <body>
-<div th:replace="fragments/headerfooter :: header"> header</div>
+<div th:replace="fragments/headerfooter :: header"></div>
 
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <h1 th:if="${movies != null}" class="text-center">Your cart: </h1>
-            <section th:each="movie: ${movies}" class="list-group-item">
-                <a id="movie" th:href="@{'detail/' + ${movie.getId()}}">
-                    <span id="movieTitle" th:text="${movie.getTitle()} + ' by ' + ${movie.getAuthor()}"></span>
-                </a>
-            </section>
-            <h2 class="homeMain" th:if="${movies == null}">Your cart is empty</h2>
-            <form id="makePurchase" th:if="${movies != null}" th:action="@{/user/makePurchase}" method="post">
-                <input class="buttonBuy" th:value="'Finalise purchase'" type="submit">
-            </form>
+<main class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 text-center">
+            <h1 class="display-4">Your Cart</h1>
+            <p class="lead">Review your selection of movies here. When you are ready, finalize your purchase.</p>
+            <div th:if="${movies != null}">
+                <section th:each="movie: ${movies}" class="list-group-item">
+                    <a id="movie" th:href="@{'detail/' + ${movie.getId()}}">
+                        <span id="movieTitle" th:text="${movie.getTitle()} + ' by ' + ${movie.getAuthor()}"></span>
+                    </a>
+                </section>
+                <form id="makePurchase" th:action="@{/user/makePurchase}" method="post">
+                    <input class="btn btn-primary" th:value="'Finalize Purchase'" type="submit">
+                </form>
+            </div>
+            <div th:if="${movies == null}">
+                <p>Your cart is empty. Head over to the catalog to add movies.</p>
+                <a class="btn btn-primary" th:href="@{/catalog}">Browse Catalog</a>
+            </div>
         </div>
-        <div class="col-3"></div>
     </div>
-</div>
-<div th:replace="fragments/headerfooter :: footer"> footer</div>
+</main>
+
+<div th:replace="fragments/headerfooter :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+
 </body>
 </html>

@@ -1,34 +1,33 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE html>
 <html lang="nl-BE" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/head :: head">
     <meta charset="UTF-8">
     <title id="title">Catalog</title>
 </head>
 <body>
-<div th:replace="fragments/headerfooter :: header"> header</div>
+<div th:replace="fragments/headerfooter :: header"></div>
 
-<form class="filterBox" th:action="@{/user/catalog}" method="get">
-    <input type="text" name="author" placeholder="author"><br>
-    <input type="text" name="title" placeholder="title"><br>
-    <input type="number" name="year" placeholder="year"><br>
-
-    <input type="submit" th:value="Filter">
-</form>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <h1 class="text-center">Movies: </h1>
-            <section th:each="movie: ${movies}" class="list-group-item">
-                <a id="movie" th:href="@{'detail/' + ${movie.getId()}}">
-                    <span id="movieTitle" th:text="${movie.getTitle()}"></span>
-                </a>
-            </section>
+<main class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 text-center">
+            <h1 class="display-4">Catalog</h1>
+            <p class="lead">Explore our vast selection of movies. Click on any title to learn more about it.</p>
+            <div th:if="${movies != null}">
+                <section th:each="movie: ${movies}" class="list-group-item">
+                    <a id="movie" th:href="@{'detail/' + ${movie.getId()}}">
+                        <span id="movieTitle" th:text="${movie.getTitle()} + ' by ' + ${movie.getAuthor()}"></span>
+                    </a>
+                </section>
+            </div>
+            <div th:if="${movies == null}">
+                <p>No movies are available at this moment. Please check back later.</p>
+            </div>
         </div>
-        <div class="col-3"></div>
     </div>
-</div>
-<div th:replace="fragments/headerfooter :: footer"> footer</div>
+</main>
+
+<div th:replace="fragments/headerfooter :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+
 </body>
 </html>
