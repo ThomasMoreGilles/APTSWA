@@ -9,15 +9,15 @@ public class Movie {
     @SequenceGenerator(name = "movie_generator", sequenceName = "movie_seq", allocationSize = 1)
     @Id
     private int id;
-    private String author;
+    private String director;
     private String title;
     private int duration;
     private int year;
 
     private String description;
 
-    public Movie(String author, String title, String description, int duration, int year) {
-        this.author = author;
+    public Movie(String director, String title, String description, int duration, int year) {
+        this.director = director;
         this.title = title;
         this.description = description;
         this.duration = duration;
@@ -28,7 +28,7 @@ public class Movie {
     }
 
     public String getAuthor() {
-        return author;
+        return director;
     }
 
     public String getTitle() {

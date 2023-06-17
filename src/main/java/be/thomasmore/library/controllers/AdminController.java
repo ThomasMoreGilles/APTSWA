@@ -41,8 +41,8 @@ public class AdminController {
     }
 
     @PostMapping({"/addMovie","/addmovie"})
-    public String addMoviePost(@RequestParam String title, @RequestParam String author,@RequestParam String description , @RequestParam int year, @RequestParam int duration){
-        Movie movie = new Movie(author, title, description, duration, year);
+    public String addMoviePost(@RequestParam String title, @RequestParam String director,@RequestParam String description , @RequestParam int year, @RequestParam int duration){
+        Movie movie = new Movie(director, title, description, duration, year);
         movieRepository.save(movie);
         return "redirect:/admin/manageMovies";
     }

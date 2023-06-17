@@ -43,10 +43,10 @@ public class UserController {
     }
 
     @GetMapping({"/catalog"})
-    public String catalog(Model model, @RequestParam(required = false) String author, @RequestParam(required = false) String title, @RequestParam(required = false) Integer year) {
+    public String catalog(Model model, @RequestParam(required = false) String director, @RequestParam(required = false) String title, @RequestParam(required = false) Integer year) {
         Iterable<Movie> movies;
-        if (author != null && author != "") {
-            movies = movieRepository.findAllByAuthor(author);
+        if (director != null && director != "") {
+            movies = movieRepository.findAllByAuthor(director);
         } else if (title != null && title != "") {
             movies = movieRepository.findAllByTitle(title);
         } else if (year != null) {
