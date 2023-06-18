@@ -33,7 +33,7 @@
                         <tbody>
                             <tr th:each="movie: ${movies}">
                                 <td th:text="${movie.getTitle()}"></td>
-                                <td th:text="${movie.getAuthor()}"></td>
+                                <td th:text="${movie.getDirector()}"></td>
                                 <td th:text="${movie.getYear()}"></td>
                                 <td th:text="${movie.getDuration() + ' min'}"></td>
                                 <td>

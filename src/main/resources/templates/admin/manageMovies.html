@@ -4,7 +4,7 @@
 <!-- Head -->
 <head th:replace="fragments/head :: head">
     <meta charset="UTF-8">
-    <title id="title">Tips bewerken</title>
+    <title id="title">Movies Management</title>
 </head>
 
 <body>
@@ -14,19 +14,21 @@
     <!-- Content -->
     <main class="container-fluid py-5">
         <div class="row justify-content-center">
-            
-            <div class="mt-4 text-center">
-                <a class="btn btn-primary" th:href="@{/admin/addMovie/}">Add new movie</a>
-            </div>
-            <form th:action="@{/admin/manageMovies}" method="get">
-                <input type="text" name="search" placeholder="Search by title or director" />
-                <button type="submit">Search</button>
-            </form>
-            
             <div class="col-12">
-                <h1 class="text-center mb-4">Movies:</h1>
-                <div class="table-responsive">
-                    <table class="table">
+                <!-- Jumbotron for standout message -->
+                <div class="jumbotron text-center">
+                    <h1 class="display-4">Movies Management</h1>
+                    <p class="lead">Manage your movie collection: view, add, edit, archive, sort and delete movies.</p>
+                    <hr class="my-4">
+                    <p>Click the button to add a new movie to your collection.</p>
+                    <a class="btn btn-primary btn-lg" th:href="@{/admin/addMovie/}" role="button">Add new movie</a>
+                </div>
+
+                <!-- Movies Table Section -->
+                <section class="mt-5">
+                    <h2 class="text-center mb-4">Movies:</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
                         <!-- Table header -->
                         <thead>
                             <tr>
@@ -60,10 +62,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    <!-- Archived Movies -->
-                    <h2 class="mt-4">Archived Movies:</h2>
-                    <table class="table">
-                        <!-- Table header -->
+                </div>
+            </section>
+            <!-- Archive Table Section -->
+            <section class="mt-5">
+                <h2 class="text-center mb-4">Archive:</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                     <!-- Table header -->
                         <thead>
                             <tr>
                                 <th><a th:href="@{'/admin/manageMovies?sortField=title&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Title</a></th>
@@ -97,15 +103,16 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
         </div>
-    </main>
+    </div>
+</main>
 
-    <!-- Footer -->
-    <div th:replace="fragments/headerfooter :: footer"></div>
+<!-- Footer -->
+<div th:replace="fragments/headerfooter :: footer"></div>
 
-    <!-- Scripts -->
-    <div th:replace="fragments/scripts :: scripts"></div>
+<!-- Scripts -->
+<div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
 </html>

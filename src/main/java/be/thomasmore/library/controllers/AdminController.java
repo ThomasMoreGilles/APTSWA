@@ -41,14 +41,6 @@ public class AdminController {
         Iterable<Movie> unarchivedMovies = movieRepository.findByArchivedFalse(sort);
         Iterable<Movie> archivedMovies = movieRepository.findByArchivedTrue(sort);
 
-        if (search != null && !search.isEmpty()) {
-                unarchivedMovies = movieRepository.findAllByTitle(search);
-                archivedMovies = movieRepository.findAllByTitle(search);
-        } else {
-            unarchivedMovies = movieRepository.findByArchivedFalse(sort);
-            archivedMovies = movieRepository.findByArchivedTrue(sort);
-        }
-
         model.addAttribute("unarchivedMovies", unarchivedMovies);
         model.addAttribute("archivedMovies", archivedMovies);
         model.addAttribute("sortField", sortField);

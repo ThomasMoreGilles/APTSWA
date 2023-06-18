@@ -15,7 +15,7 @@
             <div th:if="${movies != null}">
                 <section th:each="movie: ${movies}" class="list-group-item">
                     <a id="movie" th:href="@{'detail/' + ${movie.getId()}}">
-                        <span id="movieTitle" th:text="${movie.getTitle()} + ' by ' + ${movie.getAuthor()}"></span>
+                        <span id="movieTitle" th:text="${movie.getTitle()} + ' by ' + ${movie.getDirector()}"></span>
                     </a>
                 </section>
                 <form id="makePurchase" th:action="@{/user/makePurchase}" method="post">

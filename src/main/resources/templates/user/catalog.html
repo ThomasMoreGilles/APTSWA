@@ -12,14 +12,27 @@
         <div class="col-12 col-md-8 text-center">
             <h1 class="display-4">Catalog</h1>
             <p class="lead">Explore our vast selection of movies. Click on any title to learn more about it.</p>
-            <div th:if="${movies != null}">
-                <section th:each="movie: ${movies}" class="list-group-item">
-                    <a id="movie" th:href="@{'detail/' + ${movie.getId()}}">
-                        <span id="movieTitle" th:text="${movie.getTitle()} + ' by ' + ${movie.getAuthor()}"></span>
-                    </a>
-                </section>
+            <div th:if="${!movies.isEmpty()}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Director</th>
+                            <th>Year</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="movie: ${movies}">
+                            <td><a id="movie" th:href="@{'detail/' + ${movie.getId()}}" th:text="${movie.getTitle()}"></a></td>
+                            <td th:text="${movie.getDirector()}"></td>
+                            <td th:text="${movie.getYear()}"></td>
+                            <td th:text="${movie.getDuration()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div th:if="${movies == null}">
+            <div th:if="${movies.isEmpty()}">
                 <p>No movies are available at this moment. Please check back later.</p>
             </div>
         </div>
