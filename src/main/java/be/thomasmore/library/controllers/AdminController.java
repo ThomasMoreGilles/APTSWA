@@ -1,6 +1,7 @@
 package be.thomasmore.library.controllers;
 import be.thomasmore.library.model.Movie;
 import be.thomasmore.library.repositories.MovieRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,13 @@ public class AdminController {
         return "admin/home";
     }
 
-    @GetMapping({"/managemovies", "/manageMovies"})
+    @RequestMapping(value = {"/manageMovies","/managemovies"}, method = { RequestMethod.GET, RequestMethod.POST })
     public String manageMovies(Model model,
                             @RequestParam(required = false) String sortField,
-                            @RequestParam(required = false) String sortOrder) {
+                            @RequestParam(required = false) String sortOrder,
+                            @RequestParam(required = false) String search) {
 
-        Sort sort = Sort.by("title");  // Default sort
+        Sort sort = Sort.by("id");  // Default sort
 
         if (sortField != null && !sortField.isEmpty()) {
             if ("desc".equalsIgnoreCase(sortOrder)) {
@@ -38,6 +40,14 @@ public class AdminController {
 
         Iterable<Movie> unarchivedMovies = movieRepository.findByArchivedFalse(sort);
         Iterable<Movie> archivedMovies = movieRepository.findByArchivedTrue(sort);
+
+        if (search != null && !search.isEmpty()) {
+                unarchivedMovies = movieRepository.findAllByTitle(search);
+                archivedMovies = movieRepository.findAllByTitle(search);
+        } else {
+            unarchivedMovies = movieRepository.findByArchivedFalse(sort);
+            archivedMovies = movieRepository.findByArchivedTrue(sort);
+        }
 
         model.addAttribute("unarchivedMovies", unarchivedMovies);
         model.addAttribute("archivedMovies", archivedMovies);
@@ -80,6 +90,19 @@ public class AdminController {
         movie.setArchived(false);
         movieRepository.save(movie);
     });
+    return "redirect:/admin/manageMovies";
+    }
+
+    @GetMapping({"/editMovie","/editmovie"})
+    public String editMovie(@RequestParam int id, Model model){
+    Optional<Movie> movie = movieRepository.findById(id);
+    movie.ifPresent(m -> model.addAttribute("movie", m));
+    return "admin/editMovie";
+    }
+
+    @PostMapping({"/editMovie","/editmovie"})
+    public String editMoviePost(@ModelAttribute Movie movie){
+    movieRepository.save(movie);
     return "redirect:/admin/manageMovies";
     }
 

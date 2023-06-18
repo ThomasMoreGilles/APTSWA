@@ -18,6 +18,11 @@
             <div class="mt-4 text-center">
                 <a class="btn btn-primary" th:href="@{/admin/addMovie/}">Add new movie</a>
             </div>
+            <form th:action="@{/admin/manageMovies}" method="get">
+                <input type="text" name="search" placeholder="Search by title or director" />
+                <button type="submit">Search</button>
+            </form>
+            
             <div class="col-12">
                 <h1 class="text-center mb-4">Movies:</h1>
                 <div class="table-responsive">
@@ -30,7 +35,7 @@
                                 <th><a th:href="@{'/admin/manageMovies?sortField=year&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Year</a></th>
                                 <th><a th:href="@{'/admin/manageMovies?sortField=duration&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Duration</a></th>
                                 <th>Archive</th>
-                                <!-- <th>Delete</th> -->
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <!-- Table body -->
@@ -44,6 +49,12 @@
                                     <form method="post" th:action="@{/admin/archiveMovie}">
                                         <input type="hidden" name="id" th:value="${movie.getId()}">
                                         <button class="btn btn-outline-warning btn-sm" type="submit" th:name="movie">Archive</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="get" th:action="@{/admin/editMovie}">
+                                        <input type="hidden" name="id" th:value="${movie.getId()}">
+                                        <button class="btn btn-outline-primary btn-sm" type="submit" th:name="movie">Edit</button>
                                     </form>
                                 </td>
                             </tr>
