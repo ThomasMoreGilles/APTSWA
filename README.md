@@ -53,7 +53,6 @@ Volg onderstaande technische specificaties om aan de eisen van het project te vo
   - Zelf onderzochte extra functionaliteit toegevoegd.
   - Verrassend en creatief uitgewerkt.
 
-
 ## Inleveren in Canvas
 
 - Zorg ervoor dat je iets indient dat werkt. Zelfs als niet alles klaar is, moet wat je gemaakt hebt correct werken.
@@ -65,3 +64,14 @@ Volg onderstaande technische specificaties om aan de eisen van het project te vo
   - URL van je GitHub repository.
   - Vergeet niet je docent uit te nodigen (marcdc-tm).
   - URL van de gedeployde applicatie (behalve voor bundel 1).
+ 
+  ## Extra info
+
+###  login naam == passwoord
+- admin
+- gilles
+
+<br>
+  <a href="https://aptswa.onrender.com">render deploy</a>
+
+
