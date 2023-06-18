@@ -6,7 +6,8 @@ import javax.persistence.*;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_generator")
+    @SequenceGenerator(name = "movie_generator", sequenceName = "movie_seq", allocationSize = 1)
     private int id;
 
     private String title;

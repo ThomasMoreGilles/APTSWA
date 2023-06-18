@@ -119,5 +119,9 @@ public class UserController {
         return "redirect:/user/home";
     }
 
-
+    @PostMapping({"/deleteMovie","/deletemovie"})
+    public String deleteMovie(@RequestParam int id) {
+        movieRepository.findById(id).ifPresent(movie -> movieRepository.delete(movie));
+        return "redirect:/user/home";
+    }
 }

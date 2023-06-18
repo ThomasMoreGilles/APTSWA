@@ -13,8 +13,6 @@
 <form class="editMovieForm needs-validation" th:action="@{/admin/editMovie}" method="post" novalidate style="padding: 5%;">
     <h1>Edit a movie:</h1>
 
-    <input type="hidden" th:field="${movie.id}" name="id" id="id">
-
     <div class="mb-3">
         <label for="title2" class="form-label">Title</label>
         <input th:field="${movie.title}" type="text" class="form-control" id="title2" name="title" maxlength="50" placeholder="Title" required>
@@ -55,6 +53,8 @@
         </div>
     </div>
 
+    <input type="hidden" th:field="${movie.id}" name="id" id="id">
+    
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
