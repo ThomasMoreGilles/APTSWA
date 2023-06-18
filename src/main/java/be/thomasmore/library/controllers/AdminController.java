@@ -23,10 +23,15 @@ public class AdminController {
 
     @GetMapping({"/managemovies", "/manageMovies"})
     public String manageMovies(Model model){
-        Iterable<Movie> movies = movieRepository.findAll();
-        model.addAttribute("movies", movies);
+        Iterable<Movie> unarchivedMovies = movieRepository.findByArchivedFalse();
+        Iterable<Movie> archivedMovies = movieRepository.findByArchivedTrue();
+
+        model.addAttribute("unarchivedMovies", unarchivedMovies);
+        model.addAttribute("archivedMovies", archivedMovies);
+
         return "admin/manageMovies";
     }
+
 
     @PostMapping({"/deleteMovie","/deletemovie"})
     public String deleteMovie(@RequestParam int id) {
@@ -45,4 +50,23 @@ public class AdminController {
         movieRepository.save(movie);
         return "redirect:/admin/manageMovies";
     }
+
+    @PostMapping({"/archiveMovie","/archivemovie"})
+    public String archiveMovie(@RequestParam int id) {
+    movieRepository.findById(id).ifPresent(movie -> {
+        movie.setArchived(true);
+        movieRepository.save(movie);
+    });
+    return "redirect:/admin/manageMovies";
+    }
+
+    @PostMapping({"/unarchiveMovie","/unarchivemovie"})
+    public String unarchiveMovie(@RequestParam int id) {
+    movieRepository.findById(id).ifPresent(movie -> {
+        movie.setArchived(false);
+        movieRepository.save(movie);
+    });
+    return "redirect:/admin/manageMovies";
+    }
+
 }

@@ -12,4 +12,8 @@ public interface MovieRepository extends CrudRepository<Movie, Integer> {
     @Query("SELECT b FROM Movie b WHERE b.title LIKE CONCAT('%',?1,'%')")
     List<Movie> findAllByTitle(String title);
     List<Movie> findAllByYear(int year);
+
+    List<Movie> findByArchivedTrue();
+    List<Movie> findByArchivedFalse();
+
 }
