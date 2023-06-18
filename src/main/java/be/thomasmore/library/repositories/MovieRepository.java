@@ -1,6 +1,7 @@
 package be.thomasmore.library.repositories;
 
 import be.thomasmore.library.model.Movie;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,7 +14,6 @@ public interface MovieRepository extends CrudRepository<Movie, Integer> {
     List<Movie> findAllByTitle(String title);
     List<Movie> findAllByYear(int year);
 
-    List<Movie> findByArchivedTrue();
-    List<Movie> findByArchivedFalse();
-
+    List<Movie> findByArchivedTrue(Sort sort);
+    List<Movie> findByArchivedFalse(Sort sort);
 }

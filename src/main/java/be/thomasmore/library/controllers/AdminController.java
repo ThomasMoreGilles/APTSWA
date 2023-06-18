@@ -2,6 +2,7 @@ package be.thomasmore.library.controllers;
 import be.thomasmore.library.model.Movie;
 import be.thomasmore.library.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +21,31 @@ public class AdminController {
         return "admin/home";
     }
 
-
     @GetMapping({"/managemovies", "/manageMovies"})
-    public String manageMovies(Model model){
-        Iterable<Movie> unarchivedMovies = movieRepository.findByArchivedFalse();
-        Iterable<Movie> archivedMovies = movieRepository.findByArchivedTrue();
+    public String manageMovies(Model model,
+                            @RequestParam(required = false) String sortField,
+                            @RequestParam(required = false) String sortOrder) {
+
+        Sort sort = Sort.by("title");  // Default sort
+
+        if (sortField != null && !sortField.isEmpty()) {
+            if ("desc".equalsIgnoreCase(sortOrder)) {
+                sort = Sort.by(sortField).descending();
+            } else {
+                sort = Sort.by(sortField).ascending();
+            }
+        }
+
+        Iterable<Movie> unarchivedMovies = movieRepository.findByArchivedFalse(sort);
+        Iterable<Movie> archivedMovies = movieRepository.findByArchivedTrue(sort);
 
         model.addAttribute("unarchivedMovies", unarchivedMovies);
         model.addAttribute("archivedMovies", archivedMovies);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortOrder", sortOrder);
 
         return "admin/manageMovies";
     }
-
 
     @PostMapping({"/deleteMovie","/deletemovie"})
     public String deleteMovie(@RequestParam int id) {

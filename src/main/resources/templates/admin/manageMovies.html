@@ -14,20 +14,21 @@
     <!-- Content -->
     <main class="container-fluid py-5">
         <div class="row justify-content-center">
+            
+            <div class="mt-4 text-center">
+                <a class="btn btn-primary" th:href="@{/admin/addMovie/}">Add new movie</a>
+            </div>
             <div class="col-12">
                 <h1 class="text-center mb-4">Movies:</h1>
-                <div class="mt-4 text-center">
-                    <a class="btn btn-primary" th:href="@{/admin/addMovie/}">Add new movie</a>
-                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <!-- Table header -->
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Director</th>
-                                <th>Year</th>
-                                <th>Duration</th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=title&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Title</a></th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=director&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Director</a></th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=year&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Year</a></th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=duration&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Duration</a></th>
                                 <th>Archive</th>
                                 <!-- <th>Delete</th> -->
                             </tr>
@@ -54,10 +55,10 @@
                         <!-- Table header -->
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Director</th>
-                                <th>Year</th>
-                                <th>Duration</th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=title&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Title</a></th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=director&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Director</a></th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=year&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Year</a></th>
+                                <th><a th:href="@{'/admin/manageMovies?sortField=duration&sortOrder=' + ${sortOrder == 'asc' ? 'desc' : 'asc'}}">Duration</a></th>
                                 <th>Activate</th>
                                 <th>Delete</th>
                             </tr>
